@@ -1,6 +1,6 @@
-# mathwin ( feat: minifb )
+# mathwin ( feat: minifb of Rust )
 
-I want to make Light GUI for Mathematical Play based on minifb crate.
+I want to make Light GUI for Mathematical Play based on minifb crate with Rust programming language.
 
 minifb 크레이트는 크기가 작아서 작동 원리를 이해하기 쉽고.
 
