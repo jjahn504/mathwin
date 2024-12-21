@@ -15,12 +15,11 @@ fn main() {
     //화면 갱신 주기를 초당 N개의 프레임으로 낮출 수 있습니다.
     my_math.win.set_target_fps(60);
 
-    let mut count: usize = 0;
     //Demo 2: 원운동
     let mut x: f64 = half_r_max;
     let mut y: f64 = half_r_max;
-    let mut x_old: f64 = half_r_max;
-    let mut y_old: f64 = half_r_max;
+    let mut x_old: f64 = x;
+    let mut y_old: f64 = y;
     let pi_2: f64 = 2.0 * std::f64::consts::PI;
 
     let mut angle: f64 = 0.0;      
