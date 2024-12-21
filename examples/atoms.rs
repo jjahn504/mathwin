@@ -94,8 +94,5 @@ fn main() {
         	body::Body::init_bodies_atom_scale(&mut bodies, x_min, x_max, y_min, y_max);
 			my_math.clear_screen(MathWin::BLACK);
         }  		
-        if my_math.win.is_key_down(Key::Escape) {
-            break;
-        }
     }
 }
