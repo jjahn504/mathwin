@@ -18,24 +18,27 @@ fn main() {
     
     while my_math.win.is_open() && !my_math.win.is_key_down(Key::Escape) {
     //창을 닫거나 ESC 키를 계속 누르고 있으면 프로그램이 점잖게 종료합니다.(강제 종료: Ctrl+C)
-        //연속 동작을 원하는 코드를 작성합니다.
-        let mut count: usize = 0;
-        //Demo 1: 원형 두근두근.
-        while count < 1 {
-            for i in 0..100 {
-                my_math.circle(half_r_max, half_r_max, i as f64 * unit_radius, MathWin::RED); 
-                my_math.draw_x_axis_with_grid(10, MathWin::WHITE); //position_y
-                my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
-                my_math.show();
-            }        
-            for i in (0..100).rev() {
-                my_math.clear_screen(MathWin::BLACK);
-                my_math.circle(half_r_max, half_r_max, i as f64 * unit_radius, MathWin::RED); 
-                my_math.draw_x_axis_with_grid(10, MathWin::WHITE); //position_y
-                my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
-                my_math.show();
+    //연속 동작을 원하는 코드를 작성합니다.
+    //Demo 1: 원형 두근두근.
+        for i in 0..100 {
+            my_math.circle(half_r_max, half_r_max, i as f64 * unit_radius, MathWin::RED); 
+            my_math.draw_x_axis_with_grid(10, MathWin::WHITE); //position_y
+            my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
+            my_math.show();
+            if my_math.win.is_key_down(Key::Escape) {
+                break;
             }
-            count += 1;
+        }        
+        for i in (0..100).rev() {
+            my_math.clear_screen(MathWin::BLACK);
+            my_math.circle(half_r_max, half_r_max, i as f64 * unit_radius, MathWin::RED); 
+            my_math.draw_x_axis_with_grid(10, MathWin::WHITE); //position_y
+            my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
+            my_math.show();
+            if my_math.win.is_key_down(Key::Escape) {
+                break;
+            }
         }
+        
     }
 }

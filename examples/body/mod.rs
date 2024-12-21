@@ -91,8 +91,8 @@ impl Body{
 				body.mass = range_mass_electron.sample(&mut rng);
 				body.charge = range_charge_electron.sample(&mut rng);
 				body.r = 2.0E-11;
-				body.vx = range_v_xy.sample(&mut rng);;
-				body.vy = range_v_xy.sample(&mut rng);;
+				body.vx = range_v_xy.sample(&mut rng);
+				body.vy = range_v_xy.sample(&mut rng);
 				body.v_abs = (body.vx.powf(2.0) + body.vy.powf(2.0)).sqrt();			
 			}
 			id += 1;					

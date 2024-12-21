@@ -16,6 +16,7 @@ fn main() {
     my_math.win.set_target_fps(60);
 
     //Demo 2: 원운동
+    let size_particle: usize = 15;
     let mut x: f64 = half_r_max;
     let mut y: f64 = half_r_max;
     let mut x_old: f64 = x;
@@ -27,11 +28,11 @@ fn main() {
     //창을 닫거나 ESC 키를 계속 누르고 있으면 프로그램이 점잖게 종료합니다.(강제 종료: Ctrl+C)
     //연속 동작을 원하는 코드를 작성합니다.
         my_math.line(half_r_max, half_r_max, x_old, y_old, MathWin::BLACK);
-        my_math.circle_digit_radius(x_old, y_old, MathWin::BLACK, 20); 
+        my_math.circle_digit_radius(x_old, y_old, MathWin::BLACK, size_particle); 
         x = half_r_max + 0.5 * half_r_max * (angle.sin());
         y = half_r_max + 0.5 * half_r_max * (angle.cos());
         my_math.line(half_r_max, half_r_max, x, y, MathWin::BLUE);
-        my_math.circle_digit_radius(x, y, MathWin::RED, 20); 
+        my_math.circle_digit_radius(x, y, MathWin::RED, size_particle); 
         my_math.draw_x_axis_with_grid(10, MathWin::WHITE); //position_y
         my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
         my_math.show();

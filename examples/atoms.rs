@@ -1,4 +1,4 @@
-
+#![allow(unused_assignments)]
 use minifb::Key;
 use mathwin::MathWin;
 
@@ -16,9 +16,10 @@ fn main() {
 	let x_min: f64 = -25.0E-10; //2D 상자 크기
     let y_min: f64 = -25.0E-10; //2D 상자 크기
 	
-    let mut string_disp_0 = "         ".to_owned();  // 상자 안 메세지(1)  
-    let mut string_disp_1 = "         ".to_owned();  // 상자 안 메세지(2)  
-    let mut string_disp_2 = "         ".to_owned();  // 상자 안 메세지(2)  
+    let mut string_disp_0 = "                 ".to_owned();  // 상자 안 메세지(1)  
+    let mut string_disp_1 = "                 ".to_owned();  // 상자 안 메세지(2)  
+    let mut string_disp_2 = "                 ".to_owned();  // 상자 안 메세지(2)  
+    let mut string_disp_3 = "                 ".to_owned();  // 상자 안 메세지(2)  
     
     //입자 개수, 위치... 세팅
     let num_of_body: usize = 10;
@@ -74,14 +75,18 @@ fn main() {
     	my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
     	
 		string_disp_0 = format!("Positron & Electron in a Atom"); 
-		string_disp_1 = format!("Potential Energy of Center Particle"); 
-        string_disp_2 = format!("(Lennard-Jones potential)"); 
-        my_math.print_str6x8(100, 100, &string_disp_0, MathWin::BLACK); 
-        my_math.print_str6x8(400, 100, &string_disp_1, MathWin::BLACK); 
-        my_math.print_str6x8(400, 115, &string_disp_2, MathWin::BLACK); 
-        my_math.print_str6x8(100, 100, &string_disp_0, MathWin::WHITE); 
-		my_math.print_str6x8(400, 100, &string_disp_1, MathWin::GREEN); 
-        my_math.print_str6x8(400, 115, &string_disp_2, MathWin::GREEN); 
+		string_disp_1 = format!("R : Reset!"); 
+		string_disp_2 = format!("Potential Energy of Center Particle"); 
+        string_disp_3 = format!("(Lennard-Jones potential)"); 
+        my_math.print_str6x8(100, 100, &string_disp_0, MathWin::BLACK); //메세지 지우기 
+        my_math.print_str6x8(100, 115, &string_disp_1, MathWin::BLACK); 
+        my_math.print_str6x8(400, 100, &string_disp_2, MathWin::BLACK); 
+        my_math.print_str6x8(400, 115, &string_disp_3, MathWin::BLACK); 
+        
+        my_math.print_str6x8(100, 100, &string_disp_0, MathWin::WHITE); //메세지 쓰기
+		my_math.print_str6x8(100, 115, &string_disp_1, MathWin::WHITE); 
+        my_math.print_str6x8(400, 100, &string_disp_2, MathWin::GREEN); 
+        my_math.print_str6x8(400, 115, &string_disp_3, MathWin::GREEN); 
         
         my_math.show();
 
@@ -89,5 +94,8 @@ fn main() {
         	body::Body::init_bodies_atom_scale(&mut bodies, x_min, x_max, y_min, y_max);
 			my_math.clear_screen(MathWin::BLACK);
         }  		
+        if my_math.win.is_key_down(Key::Escape) {
+            break;
+        }
     }
 }
