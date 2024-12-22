@@ -19,7 +19,7 @@ minifb 크레이트는 크기가 작아서 작동 원리를 이해하기 쉽고.
 ```
 cargo run --example heart
 ```
-<img src="pic/heart.gif" width="200" height="400"/>
+<img src="pic/heart.gif" width="400" height="400"/>
 <img src="pic/heart.gif" style="zoom:50%;" />원 그리는 기능 테스트
 
 
