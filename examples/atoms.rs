@@ -55,8 +55,14 @@ fn main() {
 		}
 		
 		for body in &mut bodies {
-			my_math.circle(body.x_old, body.y_old, body.r, MathWin::BLACK);
-			my_math.circle(body.x, body.y, body.r, MathWin::RED);
+            //핵 크기: body.r = 4.0E-11;
+            if body.r >= 4.0E-11 {
+                my_math.circle(body.x_old, body.y_old, 5.0E-11, MathWin::BLACK);
+			    my_math.circle(body.x, body.y, 5.0E-11, MathWin::RED);    
+            } else {
+                my_math.circle(body.x_old, body.y_old, 3.0E-11, MathWin::BLACK);
+			    my_math.circle(body.x, body.y, 3.0E-11, MathWin::RED);
+            }
 			body.x_old = body.x;
 			body.y_old = body.y;
 	    }
