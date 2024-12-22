@@ -33,5 +33,4 @@ cargo run --example atoms_10000 --release
 ```
 
 [.gitignore 파일의 내용]
-# ignore all files in any directory named temp
 target/
