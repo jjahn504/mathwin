@@ -196,6 +196,9 @@ impl MathWin{
         let y_end: i32 = radius as i32;
         let r: i32 = radius as i32;
         let color_circle: u32 = color;
+
+
+
         for x in 0_i32..x_end{
             for y in 0_i32..y_end{
                 let criterion = x * x + y * y - r * r;
