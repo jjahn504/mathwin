@@ -1,6 +1,1 @@
-D:\work\rust\mathwin\target\debug\examples\atoms.exe: examples\atoms.rs examples\body\mod.rs
-
-D:\work\rust\mathwin\target\debug\examples\atoms.d: examples\atoms.rs examples\body\mod.rs
-
-examples\atoms.rs:
-examples\body\mod.rs:
+/Users/anjongje/rust/mathwin/target/debug/examples/atoms: /Users/anjongje/rust/mathwin/examples/atoms.rs /Users/anjongje/rust/mathwin/examples/body/mod.rs /Users/anjongje/rust/mathwin/src/lib.rs

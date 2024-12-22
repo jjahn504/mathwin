@@ -100,7 +100,8 @@ impl MathWin{
     pub fn circle(&mut self, x_center: f64, y_center: f64, radius: f64, color: u32) {
         let x_center_digit: usize = self.x_start_digit + 
             (((x_center - self.x_start) / self.x_dot_scale) as usize);
-        let y_center_digit: usize = self.y_start_digit - 
+        let y_start: usize = self.y_start_digit    
+        let y_center_digit: usize = self.y_start_digit as usize -  
             (((y_center - self.y_start) / self.y_dot_scale) as usize);
         let radius_digit: usize = (radius / self.x_dot_scale) as usize; //반지름 크기는 x축 스케일 
         self.circle_digit(x_center_digit, y_center_digit, radius_digit, color); 
