@@ -1,4 +1,4 @@
-OUT_DIR = Some(/Users/anjongje/rust/matthwin/target/release/build/minifb-2e781c4140f8ed71/out)
+OUT_DIR = Some(/Users/anjongje/rust/mathwin/target/release/build/minifb-2e781c4140f8ed71/out)
 OPT_LEVEL = Some(3)
 TARGET = Some(aarch64-apple-darwin)
 HOST = Some(aarch64-apple-darwin)
@@ -50,6 +50,6 @@ HOST_ARFLAGS = None
 cargo:rerun-if-env-changed=ARFLAGS
 ARFLAGS = None
 cargo:rustc-link-lib=static=minifb_native
-cargo:rustc-link-search=native=/Users/anjongje/rust/matthwin/target/release/build/minifb-2e781c4140f8ed71/out
+cargo:rustc-link-search=native=/Users/anjongje/rust/mathwin/target/release/build/minifb-2e781c4140f8ed71/out
 cargo:rustc-link-lib=framework=Metal
 cargo:rustc-link-lib=framework=MetalKit
