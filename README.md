@@ -33,8 +33,8 @@ cargo run --example rotation
 
 <br>
 
-입자론으로 시뮬레이션 한 원자 내부
-'R' 키를 누르면 리셋 됨.
+입자론으로 시뮬레이션 한 원자 내부.
+('R' 키를 누르면 리셋 됨)
 ```rust
 cargo run --example atoms
 ```
@@ -44,7 +44,7 @@ cargo run --example atoms
 <br>
 
 입자론으로 시뮬레이션 한 원자 내부
-(전자 1만 개 거동을 동시에 고한찰함)
+(전자 1만 개의 거동을 동시에 관찰함)
 
 
 ```rust
