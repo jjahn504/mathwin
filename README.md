@@ -19,7 +19,9 @@ minifb 크레이트는 크기가 작아서 작동 원리를 이해하기 쉽고.
 ```
 cargo run --example heart
 ```
-<img src="pic/heart.gif" width="400" height="400"/>원 그리는 기능 테스트
+<img src="pic/heart.gif" width="400" height="400"/>
+
+원 그리는 기능 테스트
 
 
 
@@ -28,7 +30,9 @@ cargo run --example heart
 cargo run --example rotation
 ```
 
-<img src="pic/rotation.gif" width="400" height="400"/>선 그리는 기능 테스트
+<img src="pic/rotation.gif" width="400" height="400"/>
+
+선 그리는 기능 테스트
 
 
 
@@ -37,7 +41,9 @@ cargo run --example rotation
 cargo run --example atoms
 ```
 
-<img src="pic/atoms.gif" width="400" height="400"/> 'R' 키를 누르면 리셋 됨.
+<img src="pic/atoms.gif" width="400" height="400"/>
+
+'R' 키를 누르면 리셋 됨.
 
 
 
@@ -45,9 +51,13 @@ cargo run --example atoms
 cargo run --example atoms_10000 --release
 ```
  
-<img src="pic/atoms_10000.gif" width="400" height="400"/>초기 모습
+<img src="pic/atoms_10000.gif" width="400" height="400"/>
 
-<img src="pic/atoms_10000-2.gif" width="400" height="400"/>시간이 흐른 후의 모습
+초기 모습
+
+<img src="pic/atoms_10000-2.gif" width="400" height="400"/>
+
+시간이 흐른 후의 모습
 
 
 
