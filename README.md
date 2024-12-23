@@ -16,45 +16,46 @@ minifb 크레이트는 크기가 작아서 작동 원리를 이해하기 쉽고.
 
 ## To run this example:
 
+원 그리는 기능 테스트
 ```
 cargo run --example heart
 ```
 <img src="pic/heart.gif" width="400" height="400"/>
-원 그리는 기능 테스트
-<br>
-<br>
+
 <br>
 
-
-
+선 그리는 기능 테스트
 ```
 cargo run --example rotation
 ```
 
 <img src="pic/rotation.gif" width="400" height="400"/>
-선 그리는 기능 테스트
 
 
 
-
+입자론으로 시뮬레이션 한 원자 내부
+'R' 키를 누르면 리셋 됨.
 ```rust
 cargo run --example atoms
 ```
 
 <img src="pic/atoms.gif" width="400" height="400"/>
-'R' 키를 누르면 리셋 됨.
 
+
+
+입자론으로 시뮬레이션 한 원자 내부
+(전자 1만 개 거동을 동시에 고한찰함)
 
 
 ```rust
 cargo run --example atoms_10000 --release
 ```
- 
+초기 모습 
 <img src="pic/atoms_10000.gif" width="400" height="400"/>
-초기 모습
-
-<img src="pic/atoms_10000-2.gif" width="400" height="400"/>
+<br>
 시간이 흐른 후의 모습
+<img src="pic/atoms_10000-2.gif" width="400" height="400"/>
+
 
 
 
