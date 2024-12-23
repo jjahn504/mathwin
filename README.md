@@ -53,6 +53,8 @@ cargo run --example atoms_10000 --release
 초기 모습 
 <img src="pic/atoms_10000.gif" width="400" height="400"/>
 <br>
+
+
 시간이 흐른 후의 모습
 <img src="pic/atoms_10000-2.gif" width="400" height="400"/>
 
