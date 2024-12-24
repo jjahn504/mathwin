@@ -60,6 +60,57 @@ cargo run --example atoms_10000 --release
 <img src="pic/atoms_10000-2.gif" width="400" height="400"/>
 
 <br>
+
+<함수의 그래프 그리기>
+
+(1차 함수)
+```rust
+cargo run --example graph_order_1
+```
+
+<img src="pic/graph_order_1.png" width="400" height="400"/>
+
+<br>
+
+(2차 함수)
+```rust
+cargo run --example graph_order_2
+```
+
+<img src="pic/graph_order_2.png" width="400" height="400"/>
+
+<br>
+
+
+(3차 함수)
+```rust
+cargo run --example graph_order_3
+```
+
+<img src="pic/graph_order_3.png" width="400" height="400"/>
+
+<br>
+
+(4차 함수)
+```rust
+cargo run --example graph_order_4
+```
+
+<img src="pic/graph_order_4.png" width="400" height="400"/>
+
+<br>
+
+(heart 함수)
+```rust
+cargo run --example graph_hert
+```
+
+<img src="pic/graph_heart.png" width="400" height="400"/>
+
+<br>
+
+
+<br>
 <br>
 <br>
 
