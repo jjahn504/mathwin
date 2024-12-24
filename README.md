@@ -50,12 +50,13 @@ cargo run --example atoms
 ```rust
 cargo run --example atoms_10000 --release
 ```
-초기 모습 
+초기 모습 (입자론으로도 전자 궤도에 대해 말할 수 있을 것 같은 착각이 듭니다.)
+
 <img src="pic/atoms_10000.gif" width="400" height="400"/>
 <br>
 
+시간이 흐른 후의 모습(이 모델은 전자 궤도에 대해 말할 수 없다는 생각이 듭니다.)
 
-시간이 흐른 후의 모습
 <img src="pic/atoms_10000-2.gif" width="400" height="400"/>
 
 <br>
