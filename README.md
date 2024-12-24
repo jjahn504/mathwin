@@ -99,6 +99,13 @@ cargo run --example graph_order_4
 <img src="pic/graph_order_4.png" width="400" height="400"/>
 
 <br>
+```rust
+fn y_eq_fx(x: f64) -> f64{
+    (x + 5.0) * (x + 2.5) * (x - 3.0) * (x - 5.0)
+}
+```
+<br>
+
 
 (heart 함수)
 ```rust
@@ -108,7 +115,16 @@ cargo run --example graph_hert
 <img src="pic/graph_heart.png" width="400" height="400"/>
 
 <br>
+```rust
+fn y_eq_fx_1(x: f64) -> f64{
+    (1.0 - (x.abs() - 1.0).powf(2.0)).powf(0.5) 
+}
 
+fn y_eq_fx_2(x: f64) -> f64{
+    (1.0 - x.abs()).acos() -  std::f64::consts::PI 
+}
+```
+<br>
 
 <br>
 <br>
