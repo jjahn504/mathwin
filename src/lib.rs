@@ -127,7 +127,7 @@ impl MathWin{
         let x0: usize = self.x_start_digit + (delta_x0 / self.x_dot_scale) as usize;
         let y0: usize = self.y_start_digit - (delta_y0 / self.y_dot_scale) as usize;
         let x1: usize = self.x_start_digit + (delta_x1 / self.x_dot_scale) as usize;
-        let y1: usize = self.y_start_digit - (delta_y1 / self.x_dot_scale) as usize;
+        let y1: usize = self.y_start_digit - (delta_y1 / self.y_dot_scale) as usize;
         
         self.line_digit(x0, y0, x1, y1, color);    
     }
@@ -140,8 +140,12 @@ impl MathWin{
         let len_pin: usize = 10; // 축에 있는 핀의 길이
         let position_y: usize = self.y_start_digit;
         let range_x_digit: usize = self.x_end_digit - self.x_start_digit; 
-        let delta_digit: usize = range_x_digit / num_grid; 
-        
+        let delta_digit: usize;
+        if num_grid == 0{
+            delta_digit = range_x_digit;    
+        } else{
+            delta_digit = range_x_digit / num_grid;
+        }
         for i in 0..range_x_digit {
             self.point_digit(self.x_start_digit + i, position_y, color);
             if (i % delta_digit) == 0 {
@@ -158,8 +162,12 @@ impl MathWin{
         let len_pin: usize = 10; // 축에 있는 핀의 길이
         let position_x: usize = self.x_start_digit;
         let range_y_digit: usize = self.y_start_digit - self.y_end_digit; 
-        let delta_digit: usize = range_y_digit / num_grid; 
-        
+        let delta_digit: usize;
+        if num_grid == 0{
+            delta_digit= range_y_digit;    
+        } else{
+            delta_digit = range_y_digit / num_grid;
+        }
         for i in 0..range_y_digit {
             self.point_digit(position_x, self.y_start_digit - i, color);
             if (i % delta_digit) == 0 {
@@ -172,6 +180,28 @@ impl MathWin{
             }
         }
     }
+    pub fn draw_x_axis_at_y_zero(&mut self, color: u32){
+        if self.y_start <= 0.0 && self.y_end >= 0.0 {
+            self.line(self.x_start, 0.0, self.x_end, 0.0, color);
+        } 
+    }
+    pub fn draw_y_axis_at_x_zero(&mut self, color: u32){
+        if self.x_start <= 0.0 && self.x_end >= 0.0 {
+            self.line(0.0, self.y_start, 0.0, self.y_end, color);
+        } 
+    }
+    pub fn write_zero(&mut self, color: u32){
+        if self.y_start <= 0.0 && self.y_end >= 0.0 {
+            if self.x_start <= 0.0 && self.x_end >= 0.0 {
+                let mut x_pos: usize = ((0.0 - self.x_start) / self.x_dot_scale) as usize;
+                let mut y_pos: usize = ((0.0 - self.y_start) / self.y_dot_scale) as usize;
+                x_pos = self.x_start_digit + x_pos;
+                y_pos = self.y_start_digit - y_pos;
+                self.print_str6x8(x_pos - 10, y_pos + 10, "0", color);            
+            }   
+        }
+    }
+    
         
     pub fn print_str5x8(&mut self, x_pos: usize, y_pos: usize, string: &str, color: u32) {
         let mut text = font5x8::new_renderer(self.width, self.height, color);
@@ -183,7 +213,21 @@ impl MathWin{
         text.set_color(color);
         text.draw_text(&mut self.screen, x_pos, y_pos, string);
     }
-    
+    //치역(Range) 찾기 
+    pub fn detect_range(&mut self, y_eq_fx: fn(f64) -> f64, x_min: f64, x_max: f64, width_digit: usize) 
+                        -> (f64, f64, f64) {
+        let x_delta: f64 = (x_max - x_min) / width_digit as f64;
+        let mut y_min: f64 = x_max;
+        let mut y_max: f64 = x_min;
+        for i in 0..width_digit{
+            let x = x_min + (i as f64 * x_delta);
+            let y = y_eq_fx(x);
+            if y < y_min {y_min = y; };
+            if y > y_max {y_max = y; };
+        }
+        (y_min, y_max, x_delta)
+    }
+       
     // 아래는 내부용 함수로만 사용함    
     fn point_digit(&mut self, x: usize, y: usize, color: u32){
         if x >= self.width {return;}; 
