@@ -119,6 +119,45 @@ impl Body{
 			let mu_r: f64 = mu * r;
 			scale * e.powf(-1.0 * mu_r) * (a/mu_r + b/mu_r.powf(2.0) + c/mu_r.powf(3.0)) 
 	}
+	//입자: 질량, 전하.. 태양 수준으로 초기화
+    pub fn init_bodies_solar_scale(bodies: &mut Vec<Body>, 
+		x_min: f64, x_max: f64, y_min: f64, y_max: f64) {
+		let range_mass_core = Uniform::new(1.60E30, 1.70E31); 
+		let range_charge_core = Uniform::new(1.60E13, 1.70E17); 
+		
+		let range_x = Uniform::new(x_min/2.0, x_max/2.0);
+		let range_y = Uniform::new(y_min/2.0, y_max/2.0);
+		let range_v_xy = Uniform::new(-3.0E4, 3.0E4); //
+		let mut rng = rand::thread_rng();
+		let mut id: usize = 0;
+		for body in bodies {
+			body.x = range_x.sample(&mut rng);
+			body.y = range_y.sample(&mut rng);
+			body.x_old = body.x;
+			body.y_old = body.y;
+			body.mass = range_mass_core.sample(&mut rng);
+			body.charge = range_charge_core.sample(&mut rng);
+			body.r = 4.0E10;
+			body.vx = 0.0;
+			body.vy = 0.0;
+			body.v_abs = 0.0;	
+			body.id = id;
+			id += 1;				
+		}
+	}
+	pub fn calc_force_solar(bodies: &mut Vec<Body>){
+		let num_bodies: usize = bodies.len();
+
+		for i in 0..num_bodies {
+			for j in 0..num_bodies {
+				if bodies[i].id == bodies[j].id{
+					continue;
+				}
+
+			}				
+		}
+	}
+
             
 }
 
