@@ -37,7 +37,9 @@ fn main() {
     //연속 동작을 원하는 코드를 작성합니다.
     while my_math.win.is_open() && !my_math.win.is_key_down(Key::Escape) {
     //창을 닫거나 ESC 키를 계속 누르고 있으면 프로그램이 점잖게 종료합니다.(강제 종료: Ctrl+C)  
-        body::Body::calc_force_solar(&mut bodies);
+        body::Body::calc_new_location(&mut bodies, 1000.0);
+        body::Body::merge_if_too_close(&mut bodies, 1000000.0);
+
         // Display solars in MathWin 
         for body in &mut bodies {
             my_math.circle(body.x_old, body.y_old, body.r, MathWin::BLACK);

@@ -4,7 +4,7 @@ use mathwin::MathWin;
 use rand::distributions::{Distribution, Uniform};
 use std::num;
 
-//#[derive(Debug)]
+#[derive(Debug)]
 pub struct Body{
     pub id: usize,
     pub x: f64,
@@ -145,17 +145,64 @@ impl Body{
 			id += 1;				
 		}
 	}
-	pub fn calc_force_solar(bodies: &mut Vec<Body>){
+	pub fn calc_new_location(bodies: &mut Vec<Body>, time_interval: f64){
 		let num_bodies: usize = bodies.len();
-
+		let mut distance_sq: f64;
+		let mut distance_xy: f64;
+		
+		let mut direction_force: f64; // +1.0 or -1.0
+		let mut acceleration: f64;
+		const G: f64 = 6.67430E-11; //gravitational_constant
 		for i in 0..num_bodies {
+			bodies[i].a_x = 0.0;
+			bodies[i].a_y = 0.0;
 			for j in 0..num_bodies {
 				if bodies[i].id == bodies[j].id{
 					continue;
 				}
-
-			}				
+				distance_sq = (bodies[j].x - bodies[i].x).powf(2.0) + (bodies[j].y - bodies[i].y).powf(2.0);
+				//calc_x_acceleration
+				distance_xy = bodies[j].x - bodies[i].x;
+				if distance_xy < 0.0 {
+					direction_force = -1.0; 
+				}else{
+					direction_force = 1.0;
+				}
+				acceleration = G * bodies[j].mass / distance_sq * direction_force;
+				bodies[i].a_x += acceleration;
+				//calc_y_acceleration
+				distance_xy = bodies[j].y - bodies[i].y;
+				if distance_xy < 0.0 {
+					direction_force = -1.0; 
+				}else{
+					direction_force = 1.0;
+				}
+				acceleration = G * bodies[j].mass / distance_sq * direction_force;
+				bodies[i].a_y += acceleration;
+			}		
+			bodies[i].x += bodies[i].vx * time_interval + 0.5 * bodies[i].a_x * time_interval.powf(2.0);
+			bodies[i].y += bodies[i].vy * time_interval + 0.5 * bodies[i].a_y * time_interval.powf(2.0);
+			bodies[i].vx += bodies[i].a_x * time_interval;
+			bodies[i].vy += bodies[i].a_y * time_interval;  				
 		}
+	}
+	pub fn merge_if_too_close(bodies: &mut Vec<Body>, merge_distance: f64){
+		let num_bodies: usize = bodies.len();
+		let mut distance_sq: f64;
+		let merge_distance_sq: f64 = merge_distance.poef(2.0);
+		for i in 0..num_bodies {
+			
+			for j in 0..num_bodies {
+				if bodies[i].id == bodies[j].id{
+					continue;
+				}
+				distance_sq = (bodies[j].x - bodies[i].x).powf(2.0) + (bodies[j].y - bodies[i].y).powf(2.0);
+				if distance_sq <= merge_distance_sq{
+					
+				}
+
+
+
 	}
 
             
