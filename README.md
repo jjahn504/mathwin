@@ -16,7 +16,7 @@ minifb 크레이트는 크기가 작아서 작동 원리를 이해하기 쉽고.
 
 ## To run this example:
 
-원 그리는 기능 테스트
+1) 원 그리는 기능 테스트
 ```
 cargo run --example heart
 ```
@@ -24,7 +24,7 @@ cargo run --example heart
 
 <br>
 
-선 그리는 기능 테스트
+2) 선 그리는 기능 테스트
 ```
 cargo run --example rotation
 ```
@@ -33,7 +33,7 @@ cargo run --example rotation
 
 <br>
 
-입자론으로 시뮬레이션 한 원자 내부.
+3) 입자론으로 시뮬레이션 한 원자 내부.
 ('R' 키를 누르면 리셋 됨)
 ```rust
 cargo run --example atoms
@@ -43,7 +43,7 @@ cargo run --example atoms
 
 <br>
 
-입자론으로 시뮬레이션 한 원자 내부
+4) 입자론으로 시뮬레이션 한 원자 내부
 (전자 1만 개의 거동을 동시에 관찰함)
 
 
@@ -61,9 +61,9 @@ cargo run --example atoms_10000 --release
 
 <br>
 
-<함수의 그래프 그리기>
+5) 함수의 그래프 그리기
 
-(1차 함수)
+5-1) 1차 함수
 ```rust
 cargo run --example graph_order_1
 ```
@@ -72,7 +72,7 @@ cargo run --example graph_order_1
 
 <br>
 
-(2차 함수)
+5-2) 2차 함수
 ```rust
 cargo run --example graph_order_2
 ```
@@ -82,7 +82,7 @@ cargo run --example graph_order_2
 <br>
 
 
-(3차 함수)
+5-3) 3차 함수
 ```rust
 cargo run --example graph_order_3
 ```
@@ -91,7 +91,7 @@ cargo run --example graph_order_3
 
 <br>
 
-(4차 함수)
+5-4) 4차 함수
 ```rust
 cargo run --example graph_order_4
 ```
@@ -108,7 +108,7 @@ fn y_eq_fx(x: f64) -> f64{
 <br>
 
 
-(heart 함수)
+5-5) heart 함수
 ```rust
 cargo run --example graph_hert
 ```
@@ -131,7 +131,3 @@ fn y_eq_fx_2(x: f64) -> f64{
 <br>
 <br>
 <br>
-
-[.gitignore 파일의 내용]
-
-target/
