@@ -62,8 +62,8 @@ impl MathWin{
             y_start: -1.5E16,
             x_end: 1.5E16,
             y_end: 1.5E16,
-            x_dot_scale: 0.0E16,
-            y_dot_scale: 0.0E16,      
+            x_dot_scale: 0.0,
+            y_dot_scale: 0.0,      
         }
     }
     pub fn initialize(&mut self, x_start: f64, x_end: f64, y_start: f64, y_end: f64) {

@@ -20,7 +20,7 @@ pub struct Body{
 	pub charge: f64,
     pub r: f64, //물체의 반지름
     pub color: u32,
-    pub exist: usize, //0: No, 1: Yes
+    pub exist: bool, 
 }
 impl Copy for Body{}
 impl Clone for Body {
@@ -46,7 +46,7 @@ impl Body{
 			charge: 0.0,
             r: 0.0, //물체의 반지름
             color: MathWin::BLACK,
-            exist: 1, //0: No, 1: Yes
+            exist: true, 
         };
         return new_body;
     }
@@ -127,7 +127,7 @@ impl Body{
 		
 		let range_x = Uniform::new(x_min/2.0, x_max/2.0);
 		let range_y = Uniform::new(y_min/2.0, y_max/2.0);
-		let range_v_xy = Uniform::new(-3.0E4, 3.0E4); //
+		let range_v_xy = Uniform::new(-1.0E4, 1.0E4); 
 		let mut rng = rand::thread_rng();
 		let mut id: usize = 0;
 		for body in bodies {
@@ -138,9 +138,10 @@ impl Body{
 			body.mass = range_mass_core.sample(&mut rng);
 			body.charge = range_charge_core.sample(&mut rng);
 			body.r = 4.0E10;
-			body.vx = 0.0;
-			body.vy = 0.0;
-			body.v_abs = 0.0;	
+			body.vx = range_v_xy.sample(&mut rng);
+			body.vy = range_v_xy.sample(&mut rng);
+			body.v_abs = (body.vx.powf(2.0) + body.vy.powf(2.0)).powf(-2.0);	
+			body.exist = true; 
 			body.id = id;
 			id += 1;				
 		}
@@ -154,9 +155,15 @@ impl Body{
 		let mut acceleration: f64;
 		const G: f64 = 6.67430E-11; //gravitational_constant
 		for i in 0..num_bodies {
+			if bodies[i].exist == false{
+				continue;
+			}
 			bodies[i].a_x = 0.0;
 			bodies[i].a_y = 0.0;
 			for j in 0..num_bodies {
+				if bodies[j].exist == false{ 
+					continue;
+				}
 				if bodies[i].id == bodies[j].id{
 					continue;
 				}
@@ -189,22 +196,39 @@ impl Body{
 	pub fn merge_if_too_close(bodies: &mut Vec<Body>, merge_distance: f64){
 		let num_bodies: usize = bodies.len();
 		let mut distance_sq: f64;
-		let merge_distance_sq: f64 = merge_distance.poef(2.0);
+		let merge_distance_sq: f64 = merge_distance.powf(2.0);
+		let mut momentum_x: f64;
+		let mut momentum_y: f64;
+
 		for i in 0..num_bodies {
-			
-			for j in 0..num_bodies {
-				if bodies[i].id == bodies[j].id{
-					continue;
-				}
-				distance_sq = (bodies[j].x - bodies[i].x).powf(2.0) + (bodies[j].y - bodies[i].y).powf(2.0);
-				if distance_sq <= merge_distance_sq{
+			if bodies[i].exist{
+				for j in 0..num_bodies {
+					if bodies[i].id == bodies[j].id{
+						continue;
+					}
+					if bodies[j].exist {
+						distance_sq = (bodies[j].x - bodies[i].x).powf(2.0) + (bodies[j].y - bodies[i].y).powf(2.0);
+						if distance_sq <= merge_distance_sq{
 					
+							//전체 운동량 보존
+							momentum_x = bodies[i].mass * bodies[i].vx + bodies[j].mass * bodies[j].vx;
+							momentum_y = bodies[i].mass * bodies[i].vy + bodies[j].mass * bodies[j].vy;
+							bodies[i].mass = bodies[i].mass + bodies[j].mass; //질량 보존
+							bodies[j].mass = 0.1E-10; //먼지가 되었음
+							bodies[j].vx = 0.0;
+							bodies[j].vy = 0.0;
+							bodies[j].x = 0.0;
+							bodies[j].y = 0.0;
+							bodies[j].exist = false;
+
+							bodies[i].vx = momentum_x / bodies[i].mass;
+							bodies[i].vy = momentum_y / bodies[i].mass;
+							bodies[i].r = (bodies[i].r.powf(3.0) + bodies[j].r.powf(3.0)).powf(1.0/3.0); //부피 보존
+						}
+					}
 				}
-
-
-
-	}
-
-            
+			}
+		}
+	}            
 }
 

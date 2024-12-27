@@ -21,7 +21,7 @@ fn main() {
     let mut string_disp_1 = "                 ".to_owned();  // 상자 안 메세지(1)  
     
     //입자 개수, 위치... 세팅
-    let num_of_body: usize = 3;
+    let num_of_body: usize = 50;
     let mut bodies: Vec<body::Body> = Vec::new();
     body::Body::make_bodies(&mut bodies, num_of_body);
     body::Body::init_bodies_solar_scale(&mut bodies, x_min, x_max, y_min, y_max);
@@ -37,17 +37,26 @@ fn main() {
     //연속 동작을 원하는 코드를 작성합니다.
     while my_math.win.is_open() && !my_math.win.is_key_down(Key::Escape) {
     //창을 닫거나 ESC 키를 계속 누르고 있으면 프로그램이 점잖게 종료합니다.(강제 종료: Ctrl+C)  
-        body::Body::calc_new_location(&mut bodies, 1000.0);
-        body::Body::merge_if_too_close(&mut bodies, 1000000.0);
+        
+        body::Body::calc_new_location(&mut bodies, 1.0E3);   
 
         // Display solars in MathWin 
         for body in &mut bodies {
+            if body.exist == false{
+                continue;
+            }          
             my_math.circle(body.x_old, body.y_old, body.r, MathWin::BLACK);
+        }
+        //merge_distance가 너무 작으면 인력의 급격한 증가를 시뮬레이션하기 어려워짐: 역학적 에너지 보존이 안 됨됨
+        body::Body::merge_if_too_close(&mut bodies, 4.0E10); 
+        for body in &mut bodies {
+            if body.exist == false{
+                continue;
+            }          
 			my_math.circle(body.x, body.y, body.r, MathWin::RED);
 			body.x_old = body.x;
 			body.y_old = body.y;
-	    }
-				
+	    }			
         my_math.draw_x_axis_with_grid(10, MathWin::WHITE); //position_y
     	my_math.draw_y_axis_with_grid(10, MathWin::WHITE);  //position_x
     	
