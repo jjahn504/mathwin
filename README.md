@@ -147,9 +147,18 @@ fn y_eq_fx_2(x: f64) -> f64{
 
 6) 50개 태양의 움직임(중력만 고려했음)
 ```rust
-cargo run --example solar_n_body
+cargo run --example solar_50_body
 ```
 
-<img src="pic/solar_n_body_50.gif" width="400" height="400"/>
+<img src="pic/50_body.gif" width="400" height="400"/>
+
+<br>
+
+7) 2000개 태양의 움직임(중력만 고려했음)
+```rust
+cargo run --example solar_2000_body
+```
+
+<img src="pic/2000_body.gif" width="400" height="400"/>
 
 <br>
