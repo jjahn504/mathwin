@@ -2,7 +2,7 @@
 
 use mathwin::MathWin;
 use rand::distributions::{Distribution, Uniform};
-use std::num;
+use std::{f64::RADIX, num};
 
 #[derive(Debug)]
 pub struct Body{
@@ -137,7 +137,7 @@ impl Body{
 			body.y_old = body.y;
 			body.mass = range_mass_core.sample(&mut rng);
 			body.charge = range_charge_core.sample(&mut rng);
-			body.r = 4.0E10;
+			body.r = 1.0E11;
 			body.vx = range_v_xy.sample(&mut rng);
 			body.vy = range_v_xy.sample(&mut rng);
 			body.v_abs = (body.vx.powf(2.0) + body.vy.powf(2.0)).powf(-2.0);	
@@ -208,6 +208,46 @@ impl Body{
 					}
 					if bodies[j].exist {
 						distance_sq = (bodies[j].x - bodies[i].x).powf(2.0) + (bodies[j].y - bodies[i].y).powf(2.0);
+						if distance_sq <= merge_distance_sq{
+					
+							//전체 운동량 보존
+							momentum_x = bodies[i].mass * bodies[i].vx + bodies[j].mass * bodies[j].vx;
+							momentum_y = bodies[i].mass * bodies[i].vy + bodies[j].mass * bodies[j].vy;
+							bodies[i].mass = bodies[i].mass + bodies[j].mass; //질량 보존
+							bodies[j].mass = 0.1E-10; //먼지가 되었음
+							bodies[j].vx = 0.0;
+							bodies[j].vy = 0.0;
+							bodies[j].x = 0.0;
+							bodies[j].y = 0.0;
+							bodies[j].exist = false;
+
+							bodies[i].vx = momentum_x / bodies[i].mass;
+							bodies[i].vy = momentum_y / bodies[i].mass;
+							bodies[i].r = (bodies[i].r.powf(3.0) + bodies[j].r.powf(3.0)).powf(1.0/3.0); //부피 보존
+						}
+					}
+				}
+			}
+		}
+	}
+	pub fn merge_if_too_close_more_then_radius(bodies: &mut Vec<Body>){
+		let num_bodies: usize = bodies.len();
+		let mut distance_sq: f64;
+		let mut merge_distance: f64;
+		let mut merge_distance_sq: f64;
+		let mut momentum_x: f64;
+		let mut momentum_y: f64;
+
+		for i in 0..num_bodies {
+			if bodies[i].exist{
+				for j in 0..num_bodies {
+					if bodies[i].id == bodies[j].id{
+						continue;
+					}
+					if bodies[j].exist {
+						distance_sq = (bodies[j].x - bodies[i].x).powf(2.0) + (bodies[j].y - bodies[i].y).powf(2.0);
+						merge_distance = bodies[i].r + bodies[j].r; 
+						merge_distance_sq = merge_distance.powf(2.0);
 						if distance_sq <= merge_distance_sq{
 					
 							//전체 운동량 보존

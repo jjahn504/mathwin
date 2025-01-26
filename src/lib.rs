@@ -98,6 +98,11 @@ impl MathWin{
         self.point_digit(x_digit as usize, y_digit as usize, color); 
     }
     pub fn circle(&mut self, x_center: f64, y_center: f64, radius: f64, color: u32) {
+        if x_center > self.x_end {return;}; 
+        if y_center > self.y_end {return;};
+        if x_center < self.x_start {return;}; 
+        if y_center < self.y_start {return;};
+
         let x_center_digit: usize = self.x_start_digit + 
             (((x_center - self.x_start) / self.x_dot_scale) as usize);
         let y_start_digit: usize = self.y_start_digit;
