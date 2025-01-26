@@ -16,6 +16,7 @@ fn main() {
     let y_max: f64 = xy_max; //2D 상자 크기
 	let x_min: f64 = -1.0 * xy_max; //2D 상자 크기
     let y_min: f64 = -1.0 * xy_max; //2D 상자 크기
+    let radius: f64 = 1.0E11; //항성 반지름
 	
     let mut string_disp_0 = "                 ".to_owned();  // 상자 안 메세지(1)  
     let mut string_disp_1 = "                 ".to_owned();  // 상자 안 메세지(1)  
@@ -24,7 +25,7 @@ fn main() {
     let num_of_body: usize = 2000;
     let mut bodies: Vec<body::Body> = Vec::new();
     body::Body::make_bodies(&mut bodies, num_of_body);
-    body::Body::init_bodies_solar_scale(&mut bodies, x_min, x_max, y_min, y_max);
+    body::Body::init_bodies_solar_scale_with_radius(&mut bodies, x_min, x_max, y_min, y_max, radius);
 
     //GUI:초기화: x축 숫자 영역, y축 숫자 영역을 설정합니다.
     my_math.initialize(x_min, x_max, y_min, y_max); //x_start, x_end,y_..
@@ -73,7 +74,7 @@ fn main() {
         my_math.show();
 
 		if my_math.win.is_key_down(Key::R) {
-        	body::Body::init_bodies_solar_scale(&mut bodies, x_min, x_max, y_min, y_max);
+        	body::Body::init_bodies_solar_scale_with_radius(&mut bodies, x_min, x_max, y_min, y_max, radius);
 			my_math.clear_screen(MathWin::BLACK);
         }  		
     }
