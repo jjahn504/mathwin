@@ -159,6 +159,6 @@ cargo run --example solar_50_body
 cargo run --example solar_2000_body
 ```
 
-<img src="pic/2000_body.gif" width="400" height="400"/>
+<img src="pic/2000_body.gif" width="200" height="200"/>
 
 <br>
